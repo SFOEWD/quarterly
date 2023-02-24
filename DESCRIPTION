@@ -1,0 +1,17 @@
+Package: quarterly
+Type: Package
+Title: Work With Year-Quarter Notation
+Version: 0.1.0
+Author: David Ranzolin
+Maintainer: David Ranzolin <david.ranzolin@sfgov.org>
+Description: Year-quarter is a common notation for calendar and fiscal years.
+  'Add' and 'subtract' quarters, sequence quarters, get quarter start and end dates.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    methods,
+    vctrs
+Depends: 
+    R (>= 2.10)
+RoxygenNote: 7.2.1

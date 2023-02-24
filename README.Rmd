@@ -1,0 +1,48 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# quarterly
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of quarterly is to make working with year-quarter data easier.
+
+## Installation
+
+You can install the development version of quarterly like so:
+
+``` {r eval = FALSE}
+remotes::install_github("SFOEWD/quarterly")
+```
+
+## Examples
+
+```{r example}
+library(quarterly)
+q1 <- qtr(20204, origin = "calendar")
+
+q1 + 1
+q1 - 1
+q1 - 4
+
+qtr_start(q1)
+qtr_end(q1)
+
+q2 <- qtr(20214)
+
+q2 - q1
+```
+
