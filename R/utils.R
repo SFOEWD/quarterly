@@ -1,6 +1,7 @@
 #' Utility functions with qtr
 #'
 #' @param x qtr object
+#' @param orders character vector of date-time formats, passed to parse_date_time
 #'
 #' @export
 #' @rdname qtr-utils
@@ -53,3 +54,13 @@ qtr_qtr <- function(x) {
   x_int - round(x_int, -1)
 }
 
+#' @rdname qtr-utils
+#' @export
+qtr_yq <- function(x, orders) {
+  d <- tryCatch({
+    lubridate::parse_date_time(x, orders)
+  }, warning = function(w) {
+    stop(conditionMessage(w), call. = FALSE)
+  })
+  paste0(lubridate::year(d), lubridate::quarter("2022-02-02"))
+}

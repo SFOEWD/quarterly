@@ -5,6 +5,7 @@
 \alias{qtr_end}
 \alias{qtr_year}
 \alias{qtr_qtr}
+\alias{qtr_yq}
 \title{Utility functions with qtr}
 \usage{
 qtr_start(x)
@@ -14,9 +15,13 @@ qtr_end(x)
 qtr_year(x)
 
 qtr_qtr(x)
+
+qtr_yq(x, orders)
 }
 \arguments{
 \item{x}{qtr object}
+
+\item{orders}{character vector of date-time formats, passed to parse_date_time}
 }
 \value{
 character
