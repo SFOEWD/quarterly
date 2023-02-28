@@ -44,5 +44,8 @@ qtr_end(q1)
 q2 <- qtr(20214)
 
 q2 - q1
+
+qtr_yq("2022-02-02", orders = "ymd")
+qtr_yq("10/31/2021", "mdy")
 ```
 
