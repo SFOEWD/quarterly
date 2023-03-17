@@ -2,6 +2,7 @@
 #'
 #' @param x qtr object
 #' @param orders character vector of date-time formats, passed to parse_date_time
+#' @param origin either 'calendar' or 'fiscal'
 #'
 #' @export
 #' @rdname qtr-utils
@@ -78,4 +79,22 @@ qtr_convert <- function(x) {
   msg <- paste("Converting to", names(inc), "year-quarter")
   print(msg)
   return(qtr(out, origin = names(inc)))
+}
+
+#' @rdname qtr-utils
+#' @export
+qtr_yq <- function(x, orders, origin = "calendar") {
+  stopifnot(
+    "origin must be either calendar or fiscal" = origin %in% c("calendar", "fiscal")
+  )
+  d <- tryCatch({
+    lubridate::parse_date_time(x, orders)
+  }, warning = function(w) {
+    stop(conditionMessage(w), call. = FALSE)
+  })
+  d <- lubridate::quarter(d, "year.quarter")
+  d <- gsub("\\.", "", d)
+  d <- qtr(d, "calendar")
+  if (origin == "fiscal") return(qtr_convert(d))
+  d
 }
