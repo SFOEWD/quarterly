@@ -33,13 +33,15 @@ vec_arith.qtr.double <- function(op, x, y) {
 }
 
 qtr_plus <- function(x, y) {
+  xo <- qtr_origin(x)
   qtr_ind <- which(vec_cast.character.qtr(x, character()) == quarterly::quarters)
-  quarterly::quarters[qtr_ind + y]
+  qtr(quarterly::quarters[qtr_ind + y], origin = xo)
 }
 
 qtr_minus <- function(x, y) {
+  xo <- qtr_origin(x)
   qtr_ind <- which(vec_cast.character.qtr(x, character()) == quarterly::quarters)
-  quarterly::quarters[qtr_ind - y]
+  qtr(quarterly::quarters[qtr_ind - y], origin = xo)
 }
 
 #' @rdname vctrs-compat
