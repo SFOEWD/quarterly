@@ -23,16 +23,24 @@ library(quarterly)
 q1 <- qtr(20204, origin = "calendar")
 
 q1 + 1
-#> [1] "20211"
+#> <qtr[1]>
+#> [1] 20211
 q1 - 1
-#> [1] "20203"
+#> <qtr[1]>
+#> [1] 20203
 q1 - 4
-#> [1] "20194"
+#> <qtr[1]>
+#> [1] 20194
 
 qtr_start(q1)
 #> [1] "2020-10-01"
 qtr_end(q1)
 #> [1] "2020-12-31"
+
+qtr_convert(q1)
+#> [1] "Converting to fiscal year-quarter"
+#> <qtr[1]>
+#> [1] 20212
 
 q2 <- qtr(20214)
 
@@ -40,7 +48,10 @@ q2 - q1
 #> [1] 3
 
 qtr_yq("2022-02-02", orders = "ymd")
-#> [1] "20221"
-qtr_yq("10/31/2021", "mdy")
-#> [1] "20211"
+#> <qtr[1]>
+#> [1] 20221
+qtr_yq("10/31/2021", "mdy", origin = "fiscal")
+#> [1] "Converting to fiscal year-quarter"
+#> <qtr[1]>
+#> [1] 20222
 ```
