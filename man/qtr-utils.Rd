@@ -5,7 +5,7 @@
 \alias{qtr_end}
 \alias{qtr_year}
 \alias{qtr_qtr}
-\alias{qtr_yq}
+\alias{qtr_convert}
 \title{Utility functions with qtr}
 \usage{
 qtr_start(x)
@@ -16,7 +16,7 @@ qtr_year(x)
 
 qtr_qtr(x)
 
-qtr_yq(x, orders)
+qtr_convert(x)
 }
 \arguments{
 \item{x}{qtr object}
@@ -30,9 +30,10 @@ character
 Utility functions with qtr
 }
 \examples{
-q <- qtr(20204)
+q <- qtr(20204, "calendar")
 qtr_start(q)
 qtr_end(q)
 qtr_year(q)
 qtr_qtr(q)
+qtr_convert(q)
 }

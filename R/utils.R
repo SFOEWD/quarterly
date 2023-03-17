@@ -8,16 +8,21 @@
 #' @return character
 #'
 #' @examples
-#' q <- qtr(20204)
+#' q <- qtr(20204, "calendar")
 #' qtr_start(q)
 #' qtr_end(q)
 #' qtr_year(q)
 #' qtr_qtr(q)
+#' qtr_convert(q)
 qtr_start <- function(x) {
   stopifnot(
     "'x' must be a qtr object." = is_qtr(x)
   )
-  out <- quarterly::quarter_starts[which(names(quarterly::quarter_starts) == vec_cast.character.qtr(x, character()))]
+  o <- qtr_origin(x)
+  qs <- switch(o,
+               "calendar" = quarterly::quarter_starts,
+               "fiscal" = quarterly::fy_quarter_starts)
+  out <- qs[which(names(qs) == vec_cast.character.qtr(x, character()))]
   unname(out)
 }
 
@@ -27,7 +32,11 @@ qtr_end <- function(x) {
   stopifnot(
     "'x' must be a qtr object." = is_qtr(x)
   )
-  out <- quarterly::quarter_ends[which(names(quarterly::quarter_ends) == vec_cast.character.qtr(x, character()))]
+  o <- qtr_origin(x)
+  qs <- switch(o,
+               "calendar" = quarterly::quarter_ends,
+               "fiscal" = quarterly::fy_quarter_ends)
+  out <- qs[which(names(qs) == vec_cast.character.qtr(x, character()))]
   unname(out)
 }
 
@@ -56,11 +65,17 @@ qtr_qtr <- function(x) {
 
 #' @rdname qtr-utils
 #' @export
-qtr_yq <- function(x, orders) {
-  d <- tryCatch({
-    lubridate::parse_date_time(x, orders)
-  }, warning = function(w) {
-    stop(conditionMessage(w), call. = FALSE)
-  })
-  paste0(lubridate::year(d), lubridate::quarter("2022-02-02"))
+qtr_convert <- function(x) {
+  stopifnot(
+    "'x' must be a qtr object." = is_qtr(x)
+  )
+  o <- qtr_origin(x)
+  qc <- as.character(x)
+  inc <- switch(o,
+               "calendar" = c(fiscal = 2),
+               "fiscal" = c(calendar = -2))
+  out <- quarterly::quarters[which(quarterly::quarters == qc) + inc]
+  msg <- paste("Converting to", names(inc), "year-quarter")
+  print(msg)
+  return(qtr(out, origin = names(inc)))
 }
