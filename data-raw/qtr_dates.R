@@ -15,3 +15,13 @@ usethis::use_data(quarter_ends)
 
 quarters <- names(quarter_starts)
 usethis::use_data(quarters)
+
+fy_quarter_starts <- quarter_starts
+names(fy_quarter_starts) <- dplyr::lead(names(fy_quarter_starts), 2)
+fy_quarter_starts <- fy_quarter_starts[which(!is.na(names(fy_quarter_starts)))]
+usethis::use_data(fy_quarter_starts)
+
+fy_quarter_ends <- quarter_ends
+names(fy_quarter_ends) <- dplyr::lead(names(fy_quarter_ends), 2)
+fy_quarter_ends <- fy_quarter_ends[which(!is.na(names(fy_quarter_ends)))]
+usethis::use_data(fy_quarter_ends)
