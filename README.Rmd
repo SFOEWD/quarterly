@@ -49,5 +49,9 @@ q2 - q1
 
 qtr_yq("2022-02-02", orders = "ymd")
 qtr_yq("10/31/2021", "mdy", origin = "fiscal")
+
+seq(q1, q2)
+seq(q1, 20232)
+seq(q1, 20254, by = 4)
 ```
 
