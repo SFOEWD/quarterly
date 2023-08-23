@@ -98,3 +98,9 @@ qtr_yq <- function(x, orders, origin = "calendar") {
   if (origin == "fiscal") return(qtr_convert(d))
   d
 }
+
+#' @rdname qtr-utils
+#' @export
+qtr_current <- function() {
+  qtr_yq(Sys.Date(), "ymd")
+}

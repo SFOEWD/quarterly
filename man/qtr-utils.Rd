@@ -7,6 +7,7 @@
 \alias{qtr_qtr}
 \alias{qtr_convert}
 \alias{qtr_yq}
+\alias{qtr_current}
 \title{Utility functions with qtr}
 \usage{
 qtr_start(x)
@@ -20,6 +21,8 @@ qtr_qtr(x)
 qtr_convert(x)
 
 qtr_yq(x, orders, origin = "calendar")
+
+qtr_current()
 }
 \arguments{
 \item{x}{qtr object}
